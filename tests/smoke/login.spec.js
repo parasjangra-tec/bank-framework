@@ -10,7 +10,7 @@ test('Homepage opens', async ({ page }) => {
   await loginPage.openWebsite();
 
   // Data file se read kar rahe hain
-  console.log(loginData.validUser.username);
+  console.log(loginData[0].username);
 
   await expect(page).toHaveTitle(/ParaBank/);
 
