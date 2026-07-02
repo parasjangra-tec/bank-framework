@@ -1,12 +1,25 @@
-exports.loginData = [
+const loginData = [
+
   {
+
     username: 'john',
+
     password: 'demo',
+
     valid: true
+
   },
+
   {
-    username: 'john',
-    password: 'wrongpassword',
+
+    username: 'paras',
+
+    password: 'wrong',
+
     valid: false
+
   }
+
 ];
+
+module.exports = { loginData };

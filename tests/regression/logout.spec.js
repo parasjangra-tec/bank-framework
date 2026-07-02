@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 const { LoginPage } = require('../../pages/LoginPage');
 
-test('@smoke Valid Login', async ({ page }) => {
+test('@regression Logout User', async ({ page }) => {
 
   const loginPage = new LoginPage(page);
 
@@ -13,6 +13,16 @@ test('@smoke Valid Login', async ({ page }) => {
     process.env.PARABANK_PASSWORD
   );
 
-  await expect(page).toHaveURL(/overview.htm/);
+  await page.getByRole('link', {
+    name: 'Log Out'
+  }).click();
+
+  await expect(page).toHaveURL(/index.htm/);
+
+  await expect(
+    page.getByRole('heading', {
+      name: 'Customer Login'
+    })
+  ).toBeVisible();
 
 });

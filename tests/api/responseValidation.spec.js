@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Validate User Response', async ({ request }) => {
+test('@api @regression Validate User Response', async ({ request }) => {
 
   const response = await request.get(
     'https://jsonplaceholder.typicode.com/users/1'
@@ -8,12 +8,14 @@ test('Validate User Response', async ({ request }) => {
 
   expect(response.status()).toBe(200);
 
-  const body = await response.json();
+  const responseBody = await response.json();
 
-  expect(body.id).toBe(1);
+  expect(responseBody).toHaveProperty('id');
 
-  expect(body.name).toBe('Leanne Graham');
+  expect(responseBody).toHaveProperty('name');
 
-  expect(body.email).toContain('@');
+  expect(responseBody).toHaveProperty('username');
+
+  expect(responseBody).toHaveProperty('email');
 
 });

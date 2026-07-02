@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Delete User API', async ({ request }) => {
+test('@api @regression Delete User API', async ({ request }) => {
 
   const response = await request.delete(
     'https://jsonplaceholder.typicode.com/users/1'

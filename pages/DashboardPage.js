@@ -1,12 +1,16 @@
 class DashboardPage {
 
   constructor(page) {
+
     this.page = page;
-  }
 
-  async verifyDashboardLoaded() {
+    this.accountsOverviewHeading =
+      page.getByRole('heading', {
+        name: 'Accounts Overview'
+      });
 
-    await this.page.waitForLoadState('networkidle');
+    this.accountNumbers =
+      page.locator('#accountTable a');
 
   }
 

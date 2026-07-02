@@ -1,21 +1,27 @@
 const { test, expect } = require('@playwright/test');
 
-test('Verify Dashboard Page', async ({ page }) => {
+const { LoginPage } = require('../../pages/LoginPage');
+const { DashboardPage } = require('../../pages/DashboardPage');
 
-  await page.goto('https://parabank.parasoft.com/parabank/index.htm');
+test('@regression Verify Dashboard Page', async ({ page }) => {
 
-  await page.locator('input[name="username"]').fill('john');
+  const loginPage = new LoginPage(page);
+  const dashboardPage = new DashboardPage(page);
 
-  await page.locator('input[name="password"]').fill('demo');
+  await loginPage.openWebsite();
 
-  await page.locator('input[value="Log In"]').click();
-
-  await expect(page).toHaveURL(/overview.htm/);
+  await loginPage.login(
+    process.env.PARABANK_USERNAME,
+    process.env.PARABANK_PASSWORD
+  );
 
   await expect(
-    page.getByRole('heading', {
-      name: 'Accounts Overview'
-    })
+    dashboardPage.accountsOverviewHeading
   ).toBeVisible();
+
+  const accountCount =
+    await dashboardPage.accountNumbers.count();
+
+  expect(accountCount).toBeGreaterThan(0);
 
 });

@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Create User API', async ({ request }) => {
+test('@api @regression Create User API', async ({ request }) => {
 
   const response = await request.post(
     'https://jsonplaceholder.typicode.com/users',
@@ -16,6 +16,8 @@ test('Create User API', async ({ request }) => {
 
   const responseBody = await response.json();
 
-  console.log(responseBody);
+  expect(responseBody.name).toBe('Paras');
+
+  expect(responseBody.email).toBe('paras@test.com');
 
 });

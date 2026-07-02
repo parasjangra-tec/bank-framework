@@ -5,33 +5,30 @@ class FundTransferPage {
     this.page = page;
 
     this.transferFundsLink =
-      page.locator('a[href*="transfer"]');
+      page.getByRole('link', {
+        name: 'Transfer Funds'
+      });
 
-    this.amountInput =
+    this.amount =
       page.locator('#amount');
-
-    this.fromAccountDropdown =
-      page.locator('#fromAccountId');
-
-    this.toAccountDropdown =
-      page.locator('#toAccountId');
 
     this.transferButton =
       page.locator('input[value="Transfer"]');
 
     this.successMessage =
       page.locator('#showResult');
+
   }
 
-  async navigateToTransferFunds() {
+  async openTransferFunds() {
 
     await this.transferFundsLink.click();
 
   }
 
-  async transferFunds(amount) {
+  async transferFunds() {
 
-    await this.amountInput.fill(amount);
+    await this.amount.fill('100');
 
     await this.transferButton.click();
 
